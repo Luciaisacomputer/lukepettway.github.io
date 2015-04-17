@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Lines | ThreeJS</title>
+  	<script type="text/javascript" src="js/jquery-2.0.3.js"></script>
+  	<script type="text/javascript" src="js/three.js"></script>
+  	<script type="text/javascript" src="js/stats.js"></script>
+  	<script type="text/javascript" src="js/dat-gui.js"></script>
+    <script type="text/javascript" src="js/OrbitControls.js"></script>
+  	<style>
+  		body{margin: 0;overflow: hidden;background-color:#000;}
+  	</style>
+  </head>
+  <body>
+  	<div id="Stats-output"> <!-- stats output div --></div>
+  	<div id="WebGL-output"><!-- cool stuff goes here --> </div>
+
+  	<!-- Javascript code that runs our Three.js examples -->
+  	<script type="text/javascript">
+    $(function () {
+
+        var stats = initStats();
+      	var scene = new THREE.Scene();
+      	var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight,NEAR = 0.1, FAR = 20000);
+        var orbitControls = new THREE.OrbitControls(camera);
+        orbitControls.autoRotate = false;
+
+        camera.position.x = 0;
+      	camera.position.y = 150;
+      	camera.position.z = 400;
+
+        var clock = new THREE.Clock();
+
+      	var renderer = new THREE.WebGLRenderer();
+      	//renderer.setClearColor(0xEEEEEE);
+      	renderer.setSize(window.innerWidth, window.innerHeight);
+
+      	//create controller buttons to control speeds of bounce and rotation
+      	camera.lookAt(scene.position);
+
+        var lineGeometry = new THREE.Geometry();
+    	var vertArray = lineGeometry.vertices;
+    	vertArray.push( new THREE.Vector3(-150, -100, 0), new THREE.Vector3(-150, 100, 0) );
+    	lineGeometry.computeLineDistances();
+    	var lineMaterial = new THREE.LineBasicMaterial( { color: 0xFF00FF } );
+    	var line = new THREE.Line( lineGeometry, lineMaterial );
+    	scene.add(line);
+
+        var lineGeometry = new THREE.Geometry();
+    	var vertArray = lineGeometry.vertices;
+    	vertArray.push( new THREE.Vector3(-100, -100, 0), new THREE.Vector3(-150, 100, 0) );
+    	lineGeometry.computeLineDistances();
+    	var lineMaterial = new THREE.LineDashedMaterial( { color: 0x00cc00, dashSize: 1, gapSize: 1 }  );
+    	var line = new THREE.Line( lineGeometry, lineMaterial );
+    	scene.add(line);
+
+        var lineGeometry = new THREE.Geometry();
+    	var vertArray = lineGeometry.vertices;
+    	vertArray.push( new THREE.Vector3(-50, -100, 0), new THREE.Vector3(-150, 100, 0) );
+    	lineGeometry.computeLineDistances();
+    	var lineMaterial = new THREE.LineDashedMaterial( { color: 0xFF00FF, dashSize: 5, gapSize: 2}  );
+    	var line = new THREE.Line( lineGeometry, lineMaterial );
+    	scene.add(line);
+
+        var lineGeometry = new THREE.Geometry();
+    	var vertArray = lineGeometry.vertices;
+    	vertArray.push( new THREE.Vector3(0, -100, 0), new THREE.Vector3(-150, 100, 0) );
+    	lineGeometry.computeLineDistances();
+    	var lineMaterial = new THREE.LineDashedMaterial( { color: 0x00cc00, dashSize: 8, gapSize: 1 }  );
+    	var line = new THREE.Line( lineGeometry, lineMaterial );
+    	scene.add(line);
+
+        var lineGeometry = new THREE.Geometry();
+    	var vertArray = lineGeometry.vertices;
+    	vertArray.push( new THREE.Vector3(50, -100, 0), new THREE.Vector3(-150, 100, 0) );
+    	lineGeometry.computeLineDistances();
+    	var lineMaterial = new THREE.LineDashedMaterial( { color: 0xFF00FF, dashSize: 4, gapSize: 2 }  );
+    	var line = new THREE.Line( lineGeometry, lineMaterial );
+    	scene.add(line);
+
+
+        for(i=1; i < 650; i++){
+            var lineGeometry = new THREE.Geometry();
+        	var vertArray = lineGeometry.vertices;
+        	vertArray.push( new THREE.Vector3(50+i, -100, 0), new THREE.Vector3(-150, 100, 0) );
+        	lineGeometry.computeLineDistances();
+            if(i<250 || i>450){
+                var lineMaterial = new THREE.LineDashedMaterial( { color: 0x00cc00, dashSize: 4, gapSize: 2 }  );
+            }else{
+                var lineMaterial = new THREE.LineDashedMaterial( { color: 0xFF00FF, dashSize: 4, gapSize: 2 }  );
+            }
+        	var line = new THREE.Line( lineGeometry, lineMaterial );
+        	scene.add(line);
+        }
+
+
+
+
+        var light = new THREE.PointLight(0xffffff);
+	    light.position.set(0,250,0);
+	    scene.add(light);
+
+        scene.fog = new THREE.FogExp2( 0x9999ff, 0.00025 );
+
+
+
+
+      	//render the scene
+      	render();
+
+      	//define default steps
+      	var step=0;
+      	var step2=0;
+
+      	function render() {
+            stats.update();
+            var delta = clock.getDelta();
+            orbitControls.update(delta);
+
+            // render using requestAnimationFrame
+            requestAnimationFrame(render);
+      	    renderer.render(scene, camera);
+        }
+
+      	//fps stats info
+      	function initStats() {
+      		var stats = new Stats();
+      		stats.setMode(0);
+      		stats.domElement.style.position = 'fixed';
+      		stats.domElement.style.left = '0px';
+      		stats.domElement.style.top = '0px';
+      		$("#Stats-output").append( stats.domElement );
+      		return stats;
+      	}
+
+      	$("#WebGL-output").append(renderer.domElement);
+
+      });
+      </script>
+  </body>
+</html>
