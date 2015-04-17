@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Sprites | ThreeJS</title>
+  	<script type="text/javascript" src="js/jquery-2.0.3.js"></script>
+  	<script type="text/javascript" src="js/three.js"></script>
+  	<script type="text/javascript" src="js/stats.js"></script>
+  	<script type="text/javascript" src="js/dat-gui.js"></script>
+    <script type="text/javascript" src="js/OrbitControls.js"></script>
+  	<style>
+  		body{margin: 0;overflow: hidden;}
+  	</style>
+  </head>
+  <body>
+  	<div id="Stats-output"> <!-- stats output div --></div>
+  	<div id="WebGL-output"><!-- cool stuff goes here --> </div>
+
+  	<!-- Javascript code that runs our Three.js examples -->
+  	<script type="text/javascript">
+    $(function () {
+
+        var stats = initStats();
+      	var scene = new THREE.Scene();
+      	var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight,NEAR = 0.1, FAR = 20000);
+        var orbitControls = new THREE.OrbitControls(camera);
+        orbitControls.autoRotate = false;
+
+        camera.position.x = -30;
+      	camera.position.y = 40;
+      	camera.position.z = 30;
+
+        var clock = new THREE.Clock();
+
+      	var renderer = new THREE.WebGLRenderer();
+      	renderer.setClearColor(0x000000);
+      	renderer.setSize(window.innerWidth, window.innerHeight);
+
+      	//create controller buttons to control speeds of bounce and rotation
+      	camera.lookAt(scene.position);
+
+        var asphault = new THREE.ImageUtils.loadTexture( 'assets/textures/asphault.jpg' );
+	    asphault.wrapS = THREE.RepeatWrapping;
+        asphault.wrapT = THREE.RepeatWrapping;
+        var asphault = new THREE.MeshBasicMaterial( { map: asphault, side: THREE.DoubleSide } );
+      	var planeGeometry = new THREE.PlaneGeometry(50,50);
+      	//mesh lambert is reflective. in order to have light working, you need a material that reflects it.
+      	var planeMaterial = new THREE.MeshLambertMaterial({color: 0xffffff});
+      	var plane = new THREE.Mesh(planeGeometry,asphault);
+      	plane.rotation.x=-0.5*Math.PI;
+      	plane.position.x = 0;
+      	plane.position.y = 0;
+      	plane.position.z = 0;
+      	scene.add(plane);
+
+
+        var doometexturesrc1 = THREE.ImageUtils.loadTexture( 'assets/sprites/doom-sprite-1.png' );
+        var doometexturesrc2 = THREE.ImageUtils.loadTexture( 'assets/sprites/doom-sprite-2.png' );
+        var monster = THREE.ImageUtils.loadTexture( 'assets/sprites/monster-1.png' );
+        var uitexture = THREE.ImageUtils.loadTexture( 'assets/sprites/ui.png' );
+        var uitexture2 = THREE.ImageUtils.loadTexture( 'assets/sprites/ui-2.png' );
+
+        var doometexture1 = new THREE.SpriteMaterial( { map: doometexturesrc1, useScreenCoordinates: false,} );
+    	var sprite2 = new THREE.Sprite( doometexture1 );
+    	sprite2.position.set( 0, 2, 0 );
+    	sprite2.scale.set( 5,5, 1.0 );
+    	scene.add( sprite2 );
+
+        var doometexture2 = new THREE.SpriteMaterial( { map: doometexturesrc2, useScreenCoordinates: false, } );
+    	var sprite2 = new THREE.Sprite( doometexture2 );
+    	sprite2.position.set( 10, 2, 0 );
+    	sprite2.scale.set( 5,5, 1.0 );
+    	scene.add( sprite2 );
+
+        var monster = new THREE.SpriteMaterial( { map: monster, useScreenCoordinates: false, } );
+    	var sprite2 = new THREE.Sprite( monster );
+    	sprite2.position.set( -10, 2, 0 );
+    	sprite2.scale.set( 20,10, 1.0 );
+    	scene.add( sprite2 );
+
+
+        var uimaterial = new THREE.SpriteMaterial( { map: uitexture, useScreenCoordinates: true, alignment: THREE.SpriteAlignment.bottomRight } );
+    	var sprite = new THREE.Sprite( uimaterial );
+    	sprite.position.set( window.innerWidth , window.innerHeight , 0 );
+    	sprite.scale.set( 256, 256, 1.0 ); // imageWidth, imageHeight
+    	scene.add( sprite );
+
+        var uimaterial2 = new THREE.SpriteMaterial( { map: uitexture2, useScreenCoordinates: true, alignment: THREE.SpriteAlignment.bottomLeft } );
+    	var sprite = new THREE.Sprite( uimaterial2 );
+    	sprite.position.set(0 , window.innerHeight , 0 );
+    	sprite.scale.set( 256, 256, 1.0 ); // imageWidth, imageHeight
+    	scene.add( sprite );
+
+      	//render the scene
+      	render();
+
+      	//define default steps
+      	var step=0;
+      	var step2=0;
+
+      	function render() {
+            stats.update();
+            var delta = clock.getDelta();
+            orbitControls.update(delta);
+
+            // render using requestAnimationFrame
+            requestAnimationFrame(render);
+      	    renderer.render(scene, camera);
+        }
+
+      	//fps stats info
+      	function initStats() {
+      		var stats = new Stats();
+      		stats.setMode(0);
+      		stats.domElement.style.position = 'fixed';
+      		stats.domElement.style.left = '0px';
+      		stats.domElement.style.top = '0px';
+      		$("#Stats-output").append( stats.domElement );
+      		return stats;
+      	}
+
+      	$("#WebGL-output").append(renderer.domElement);
+
+      });
+      </script>
+  </body>
+</html>

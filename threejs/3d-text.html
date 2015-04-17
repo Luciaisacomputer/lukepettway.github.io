@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>3D Text | ThreeJS</title>
+  	<script type="text/javascript" src="js/jquery-2.0.3.js"></script>
+  	<script type="text/javascript" src="js/three.js"></script>
+  	<script type="text/javascript" src="js/stats.js"></script>
+  	<script type="text/javascript" src="js/dat-gui.js"></script>
+    <script type="text/javascript" src="js/OrbitControls.js"></script>
+    <script src="js/bitstream_vera_sans_mono_roman.typeface.js"></script>
+    <script src="js/helvetiker_bold.typeface.js"></script>
+    <script src="js/helvetiker_regular.typeface.js"></script>
+  	<style>
+  		body{margin: 0;overflow: hidden;}
+        html{ background: url(assets/images/space-bg.jpg) no-repeat center center fixed;-webkit-background-size: cover;-moz-background-size: cover;-o-background-size: cover;
+  background-size: cover; }
+  	</style>
+  </head>
+  <body>
+  	<div id="Stats-output"> <!-- stats output div --></div>
+  	<div id="WebGL-output"><!-- cool stuff goes here --> </div>
+
+  	<!-- Javascript code that runs our Three.js examples -->
+  	<script type="text/javascript">
+    $(function () {
+
+        var stats = initStats();
+      	var scene = new THREE.Scene();
+      	var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight,NEAR = 0.1, FAR = 20000);
+        var orbitControls = new THREE.OrbitControls(camera);
+        orbitControls.autoRotate = false;
+
+        camera.position.x = -200;
+        camera.position.y = 300;
+        camera.position.z = 600;
+
+        var clock = new THREE.Clock();
+
+      	var renderer = new THREE.WebGLRenderer({ antialiasing: true });
+      	//renderer.setClearColor(0xEEEEEE);
+      	renderer.setSize(window.innerWidth, window.innerHeight);
+
+        var spotLight = new THREE.SpotLight(0xffffff);
+        spotLight.position = new THREE.Vector3(734, 582, 279);
+        spotLight.target.position.x = 0;
+        spotLight.target.position.y = 0;
+        spotLight.target.position.z = 0;
+        spotLight.intensity = 2.4;
+        scene.add(spotLight);
+
+
+
+        var text1;
+        var text2;
+        var options = {
+                    size: 90,
+                    height: 90,
+                    weight: "normal",
+                    font: "helvetiker",
+                    bevelThickness: 2,
+                    bevelSize: 0.5,
+                    bevelSegments: 3,
+                    bevelEnabled: 12,
+                    curveSegments: 12,
+                    steps: 1
+                };
+
+        text1 = createMesh(new THREE.TextGeometry("THREE.JS", options));
+        text1.position.z = -100;
+        text1.position.y = 50;
+        text1.position.x= -228;
+        scene.add(text1);
+
+        text2 = createMesh(new THREE.TextGeometry("RULES!!!!", options));
+        text2.position.x= -200;
+        text2.position.y = -50;
+        text2.position.z = -100;
+        scene.add(text2);
+
+
+
+
+      	//render the scene
+      	render();
+
+      	//define default steps
+      	var step=0;
+
+      	function render() {
+            stats.update();
+            var delta = clock.getDelta();
+            orbitControls.update(delta);
+
+            // render using requestAnimationFrame
+            requestAnimationFrame(render);
+      	    renderer.render(scene, camera);
+        }
+
+      	//fps stats info
+      	function initStats() {
+      		var stats = new Stats();
+      		stats.setMode(0);
+      		stats.domElement.style.position = 'fixed';
+      		stats.domElement.style.left = '0px';
+      		stats.domElement.style.top = '0px';
+      		$("#Stats-output").append( stats.domElement );
+      		return stats;
+      	}
+
+        function createMesh(geom) {
+            var meshMaterial = new THREE.MeshPhongMaterial({specular: 0xffffff, color: 0x0271AD, shininess: 100, metal: true});
+            var plane = THREE.SceneUtils.createMultiMaterialObject(geom, [meshMaterial]);
+            return plane;
+        }
+
+
+
+
+      	$("#WebGL-output").append(renderer.domElement);
+
+      });
+      </script>
+  </body>
+</html>
