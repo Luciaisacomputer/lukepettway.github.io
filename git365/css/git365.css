@@ -23,4 +23,18 @@ h1{
   	list-style: none;
   	line-height: 100px;
  	text-align: center;
+ 	cursor: pointer;
+}
+.project:hover{
+	background: #999;
+	color: #BADA55;
+}
+.project:hover a{
+	color: #BADA55;
+}
+.project a{
+	color: #E8E8E8;
+}
+.project a:hover{
+	color: #BADA55;
 }
