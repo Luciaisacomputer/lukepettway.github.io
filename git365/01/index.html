@@ -16,7 +16,7 @@
 	</style>
 </head>
 <body>
-	<canvas id="myCanvas" width="900" height="500"></canvas>
+	<canvas id="myCanvas" width="1024" height="500"></canvas>
     <script>
 
     window.requestAnimFrame = (function(callback) {
@@ -26,45 +26,70 @@
       };
     })();
 
-    function drawRectangle(myRectangle, context) {
+    function drawRectangle(coolRectangle, context) {
      	context.beginPath();
-     	context.rect(myRectangle.x, myRectangle.y, myRectangle.width, myRectangle.height);
+     	context.rect(coolRectangle.x, coolRectangle.y, coolRectangle.width, coolRectangle.height);
      	context.fillStyle = '#BADA55';
      	context.fill();
-     	context.lineWidth = myRectangle.borderWidth;
+     	context.lineWidth = coolRectangle.borderWidth;
      	context.strokeStyle = '#333';
      	context.stroke();
     }
+    function drawTriangle(){
+      colorChanger++;
+      //triangle.fillStyle="purple";
+      triangle.fillStyle = '#' + colorChanger;
+      triangle.beginPath();
+      triangle.moveTo(100,110);
+      triangle.lineTo(200,10);
+      triangle.lineTo(300,110);
+      triangle.closePath();
+      triangle.fill();
+    }
 
-    function animate(myRectangle, canvas, context, startTime) {
+    function animate(coolRectangle, canvas, context, startTime) {
       // update
       var time = (new Date()).getTime() - startTime;
 
-      var linearSpeed = 100;
+      var linearSpeed = 500;
       // pixels / second
+
       var newX = linearSpeed * time / 1000;
 
-      if(newX < canvas.width - myRectangle.width - myRectangle.borderWidth / 2) {
-        myRectangle.x = newX;
+      var newY = linearSpeed * time / 1000;
+
+      if(newX < canvas.width - coolRectangle.width - coolRectangle.borderWidth / 2) {
+        coolRectangle.x = newX;
+
+      }
+
+      if(newY < canvas.height - coolRectangle.height - coolRectangle.borderWidth / 2) {
+        coolRectangle.y = newY;
+
+      }
+
+      if(newY < 300){
+        triangle.fillStyle="red";
       }
 
       // clear
       context.clearRect(0, 0, canvas.width, canvas.height);
 
-      drawRectangle(myRectangle, context);
+      drawRectangle(coolRectangle, context);
 
+      drawTriangle();
       // request new frame
       requestAnimFrame(function() {
-        animate(myRectangle, canvas, context, startTime);
+        animate(coolRectangle, canvas, context, startTime);
       });
     }
 
 
-	var canvas = document.getElementById('myCanvas');
-	var context = canvas.getContext('2d');
+	   var canvas = document.getElementById('myCanvas');
+	   var context = canvas.getContext('2d');
 
 
- 	var myRectangle = {
+ 	    var coolRectangle = {
         x: 180,
         y: 50,
         width: 350,
@@ -72,16 +97,18 @@
         borderWidth: 5
       };
 
-      
+       var triangle = canvas.getContext("2d");
+       var colorChanger = 1;
 
 
 
-      drawRectangle(myRectangle, context);
+
+      drawRectangle(coolRectangle, context);
 
       // wait one second before starting animation
       setTimeout(function() {
         var startTime = (new Date()).getTime();
-        animate(myRectangle, canvas, context, startTime);
+        animate(coolRectangle, canvas, context, startTime);
       }, 1000);
 
     </script>
