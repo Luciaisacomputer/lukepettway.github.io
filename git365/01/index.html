@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset=utf-8 />
+	<title></title>
+	<link rel="stylesheet" type="text/css" media="screen" href="../../css/foundation.min.css" />
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+	<!--[if IE]>
+		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<style>
+	  body {
+	    margin: 0px;
+	    padding: 0px;
+	  }
+	</style>
+</head>
+<body>
+	<canvas id="myCanvas" width="900" height="500"></canvas>
+    <script>
+
+    window.requestAnimFrame = (function(callback) {
+      return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame ||
+      function(callback) {
+        window.setTimeout(callback, 1000 / 60);
+      };
+    })();
+
+    function drawRectangle(myRectangle, context) {
+     	context.beginPath();
+     	context.rect(myRectangle.x, myRectangle.y, myRectangle.width, myRectangle.height);
+     	context.fillStyle = '#BADA55';
+     	context.fill();
+     	context.lineWidth = 2;
+     	context.strokeStyle = '#333';
+     	context.stroke();
+    }
+
+    function animate(myRectangle, canvas, context, startTime) {
+      // update
+      var time = (new Date()).getTime() - startTime;
+
+      var linearSpeed = 100;
+      // pixels / second
+      var newX = linearSpeed * time / 1000;
+
+      if(newX < canvas.width - myRectangle.width - myRectangle.borderWidth / 2) {
+        myRectangle.x = newX;
+      }
+
+      // clear
+      context.clearRect(0, 0, canvas.width, canvas.height);
+
+      drawRectangle(myRectangle, context);
+
+      // request new frame
+      requestAnimFrame(function() {
+        animate(myRectangle, canvas, context, startTime);
+      });
+    }
+
+
+	var canvas = document.getElementById('myCanvas');
+	var context = canvas.getContext('2d');
+
+
+ 	var myRectangle = {
+        x: 180,
+        y: 50,
+        width: 350,
+        height: 100,
+      };
+
+      
+
+
+
+      drawRectangle(myRectangle, context);
+
+      // wait one second before starting animation
+      setTimeout(function() {
+        var startTime = (new Date()).getTime();
+        animate(myRectangle, canvas, context, startTime);
+      }, 1000);
+
+    </script>
+</body>
+</html>
