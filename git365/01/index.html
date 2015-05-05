@@ -35,9 +35,9 @@
      	context.strokeStyle = '#333';
      	context.stroke();
     }
+
     function drawTriangle(){
       colorChanger++;
-      //triangle.fillStyle="purple";
       triangle.fillStyle = '#' + colorChanger;
       triangle.beginPath();
       triangle.moveTo(100,110);
@@ -78,6 +78,7 @@
       drawRectangle(coolRectangle, context);
 
       drawTriangle();
+
       // request new frame
       requestAnimFrame(function() {
         animate(coolRectangle, canvas, context, startTime);
