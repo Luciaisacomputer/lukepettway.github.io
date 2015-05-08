@@ -15,12 +15,51 @@
       background: #2c3e50;
       max-height: 100%;
       overflow: hidden;
+      background: url('space.jpg');
+      background-size: cover;
 	  }
+
+    .tie-fighter{
+      position: absolute;
+      top: 15%;
+      left: 25%;
+    }
+
+    .noselect {
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+    .pew{
+      font-size: 50px;
+      color: #fff;
+    }
+    body{ cursor: none; }
 	</style>
 </head>
 <body>
 
+  <img id="tie" class="tie-fighter noselect" src="tie.png" height="285" width="450">
 
+  <script>
 
+    $(document).bind('mousemove', function(e){
+        $('#tie').css({
+           left:  e.pageX,
+           top:   e.pageY
+        });
+    });
+
+    $(document).click( function(){
+
+      $( 'body' ).append( '<p class="pew noselect">Pew!</p>' );
+
+    });
+
+  </script>
 </body>
 </html>
