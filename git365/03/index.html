@@ -23,6 +23,7 @@
       position: absolute;
       top: 15%;
       left: 25%;
+      z-index: 9999;
     }
 
     .noselect {
@@ -55,9 +56,10 @@
     });
 
     $(document).click( function(){
-
-      $( 'body' ).append( '<p class="pew noselect">Pew!</p>' );
-
+      var tie_top = parseInt($( '#tie' ).css( "top" )) + 200; 
+      var tie_left = parseInt($( '#tie' ).css( "left" )) + 175;
+      $( 'body' ).append( '<p style="position:absolute;top:'+tie_top+'px;left:'+tie_left+'px;" class="pew noselect">Pew!</p>' );
+      console.log(tie_top);
     });
 
   </script>
