@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset=utf-8 />
+	<title></title>
+	<link rel="stylesheet" type="text/css" media="screen" href="../../css/foundation.min.css" />
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+	<!--[if IE]>
+		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<style>
+	  body {
+	    margin: 0px;
+	    padding: 0px;
+      background: #2c3e50;
+      max-height: 100%;
+      overflow: hidden;
+      background: url('space.jpg');
+      background-size: cover;
+	  }
+
+    .tie-fighter{
+      position: absolute;
+      top: 15%;
+      left: 25%;
+      z-index: 9999;
+    }
+
+    .noselect {
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+    .pew{
+      font-size: 50px;
+      color: #fff;
+    }
+    body{ cursor: none; }
+	</style>
+</head>
+<body>
+
+  <img id="tie" class="tie-fighter noselect" src="tie.png" height="285" width="450">
+
+  <script>
+
+    $(document).bind('mousemove', function(e){
+        $('#tie').css({
+           left:  e.pageX - 213,
+           top:   e.pageY -132
+        });
+    });
+
+    $(document).click( function(){
+      var tie_top = parseInt($( '#tie' ).css( "top" )) + 200; 
+      var tie_left = parseInt($( '#tie' ).css( "left" )) + 175;
+      $( 'body' ).append( '<p style="position:absolute;top:'+tie_top+'px;left:'+tie_left+'px;" class="pew noselect">Pew!</p>' );
+      console.log(tie_top);
+    });
+
+  </script>
+</body>
+</html>
