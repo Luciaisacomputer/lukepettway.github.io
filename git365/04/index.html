@@ -5,6 +5,7 @@
 	<title>Something Cool</title>
 	<link rel="stylesheet" type="text/css" media="screen" href="../../css/foundation.min.css" />
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+	<script type="text/javascript" src="cheet.min.js"></script>
 	<!--[if IE]>
 		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
@@ -13,8 +14,76 @@
 	    margin: 0px;
 	    padding: 0px;
 	  }
+	  .cheat-code{
+	  	display: none;
+	  }
 	</style>
 </head>
 <body>
+
+<p class="cheat-code cheat-code-1">Up</p>
+<p class="cheat-code cheat-code-2">Up</p>
+<p class="cheat-code cheat-code-3">Down</p>
+<p class="cheat-code cheat-code-4">Down</p>
+<p class="cheat-code cheat-code-5">Left</p>
+<p class="cheat-code cheat-code-6">Right</p>
+<p class="cheat-code cheat-code-7">Left</p>
+<p class="cheat-code cheat-code-8">Right</p>
+<p class="cheat-code cheat-code-9">B</p>
+<p class="cheat-code cheat-code-10">A</p>
+
+
+<script>
+
+	// cheet('↑') , function () {
+	//  	//$('.cheat-code-1').show();
+	// });
+
+	cheet('↑', function () {
+	  	if( $('.cheat-code-1').is(":hidden") ){
+	  		$('.cheat-code-1').show();
+	  	}else{
+	  		$('.cheat-code-2').show();
+	  	}
+	});
+
+	cheet('↓', function () {
+	  	if( $('.cheat-code-3').is(":hidden") ){
+	  		$('.cheat-code-3').show();
+	  	}else{
+	  		$('.cheat-code-4').show();
+	  	}
+	});
+
+	cheet('←', function () {
+	  	if( $('.cheat-code-5').is(":hidden") ){
+	  		$('.cheat-code-5').show();
+	  	}else{
+	  		$('.cheat-code-7').show();
+	  	}
+	});
+
+	cheet('→', function () {
+	  	if( $('.cheat-code-6').is(":hidden") ){
+	  		$('.cheat-code-6').show();
+	  	}else{
+	  		$('.cheat-code-8').show();
+	  	}
+	});
+
+	cheet('b', function () {
+	  	$('.cheat-code-9').show();
+	});
+
+	cheet('a', function () {
+	  	$('.cheat-code-10').show();
+	});
+
+
+	cheet('↑ ↑ ↓ ↓ ← → ← → b a', function () {
+		alert('Voilà!');
+	});
+</script>
+
 </body>
 </html>
