@@ -5,5 +5,5 @@
 /* SITE */
   Standards: HTML5, CSS3
   Components: jQuery, Orbit, Reveal
-  Software: Sublime, Git, Sass
+  Software: Atom, Git, Sass
   People: Luke Pettway!
