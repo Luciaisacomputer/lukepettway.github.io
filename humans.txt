@@ -4,6 +4,6 @@
 
 /* SITE */
   Standards: HTML5, CSS3
-  Components: jQuery, Orbit, Reveal
+  Components: jQuery, Orbit, Reveal, Starwars!
   Software: Atom, Git, Sass, Grunt
   People: Luke Pettway!
