@@ -19,6 +19,7 @@ $dimension: 250px;
   right: 25%;
   width: $dimension;
   height: $dimension;
+  overflow: hidden;
 }
 
 //Preload images hack with CSS.

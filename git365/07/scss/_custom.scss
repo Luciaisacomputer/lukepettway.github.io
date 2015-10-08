@@ -19,3 +19,18 @@ body {
   background-color: white;
   padding: 15px;
 }
+
+.fishy{
+  position: absolute;
+  width: 210px;
+  height: 82px;
+  background-image: url('../img/cat/fish.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+
+}
+
+.container {
+  position: relative;
+  overflow: hidden;
+}

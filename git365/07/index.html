@@ -4,17 +4,71 @@
   <title>CAT FLIP BOOK - Thanks ZURB! :3</title>
   <link rel="stylesheet" type="text/css" href="css/app.css">
   <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.2.3/velocity.js"></script>
 </head>
 <body>
 <h3 class="title">Resize your Browser Window Right Meow :3</h3>
 <div class="flip-book"></div>
-
+<div class="container"></div>
 
 
 
 <script>
-	
-console.log('works');
+(function() {
+
+		var $window = $(window),
+			$windowHeight = $window.height(),
+			$windowWidth = $window.width();
+
+		var  maxDOM = 2, sizes = [5,6,7,8,9,10,11],positions = ['left','right'];
+
+		$('.container').css('height', $windowHeight);
+
+		setInterval(function() {
+
+			var arrayRandomizer  = function(max) {
+				var max = ( typeof max == 'undefined' || max == null ) ? 6 : max;
+				return  Math.floor( Math.random() * max ) ;
+			},
+
+			timeRandomizer = function(max) {
+				var max = ( typeof max == 'undefined' || max == null ) ? 5000 : max;
+				return  Math.floor( Math.random() * max) -1000;
+			},
+
+			positionRandomizer = function() {
+				var max = ( typeof max == 'undefined' || max == null ) ? $windowWidth : max;
+				return Math.floor( Math.random() * max) ;
+			},
+
+			optionRandomizer = function() {
+				return Math.floor( Math.random() * 2 ) ;
+			};
+
+			//Generator 
+			for(x=0; x<maxDOM; x++) {
+				var useSize = sizes[arrayRandomizer(7)];
+				$('.container').append('<div class="fishy" style="position:absolute;'+positions[optionRandomizer()]+':'+positionRandomizer()+'px;top:-'+useSize+'px"></div>');
+			}
+
+			$('.fishy').each(function() {
+				var $this = $(this);
+				$(this).velocity({
+					translateY: $windowHeight-$this.height() ,
+					translateZ:0					
+				}, timeRandomizer() )
+				.velocity({
+					opacity : 0
+				}, 100).delay(timeRandomizer(), function() {
+
+					$(this).remove();
+
+				}) ;
+			});
+		}, 1300);
+
+
+	})();
 
 </script>
 
