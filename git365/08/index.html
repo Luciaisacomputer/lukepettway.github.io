@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>PIZZA CATS</title>
+	<link href='https://fonts.googleapis.com/css?family=Duru+Sans' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="motion-ui.min.css">
+	<link rel="stylesheet" href="lewksmotion.css">
+	
+	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+	<script type="text/javascript" src="motion-ui.js"></script>
+</head>
+<body>
+	<div class="title-container">
+		<h2 id="title" class="title">Foundation Motion UI is Awesome!</h2>
+	</div>
+	<div class="poptarts">
+		<img id="poptart" class="nyan" src="nyan-cat.png">
+		<img id="poptart2" class="nyan" src="nyan-cat-2.png">
+	</div>
+
+	<div class="pizza-row">
+		<img id="pizza-1" class="pizza pizza-1" src="pizza.png">
+		<img id="pizza-2" class="pizza pizza-2" src="pizza.png">
+		<img id="pizza-3" class="pizza pizza-3" src="pizza.png">
+		<img id="pizza-4" class="pizza pizza-4" src="pizza.png">
+		<img id="pizza-5" class="pizza pizza-5" src="pizza.png">
+		<img id="pizza-6" class="pizza pizza-6" src="pizza.png">
+		<img id="pizza-7" class="pizza pizza-7" src="pizza.png">
+		<img id="pizza-8" class="pizza pizza-8" src="pizza.png">
+		<img id="pizza-9" class="pizza pizza-9" src="pizza.png">
+		<img id="pizza-10" class="pizza pizza-10" src="pizza.png">
+		<h3 id="pr-1" class="pizzarules pr1">PIZZA RULES!</h3>
+		<h3 id="pr-2" class="pizzarules pr2">PIZZA RULES!</h3>
+		<h3 id="pr-3" class="pizzarules pr3">PIZZA RULES!</h3>
+	</div>
+
+
+	<script>
+
+	    var whichAnimation = '';
+
+		MotionUI.animateIn('#title', 'hingeInFromTop');
+
+		function spin() {
+	    	MotionUI.animateIn('#poptart', 'spinInCCW');
+			MotionUI.animateIn('#poptart2', 'spinIn');
+		}
+
+		var spininterval = setInterval(spin, 3000);
+
+
+		function pizzas(){
+			for (i=1; i <= 10; i++) {
+				//MotionUI.animateIn('#pizza-'+i, 'scaleInDown');
+				if(i%2){
+					whichAnimation = 'scaleInDown';
+				}else{
+					whichAnimation = 'scaleInUp';
+				}
+				MotionUI.animateIn('#pizza-'+i, whichAnimation);
+			};
+		}
+
+		var pizzainterval = setInterval(pizzas, 4000);
+
+		function prules(){
+			for (i = 1; i <= 3; i++) {
+
+				if(i==1){
+					whichAnimation = 'hingeInFromLeft';
+				}else if(i==2){
+					whichAnimation = 'hingeInFromBottom';
+				}else{
+					whichAnimation = 'hingeInFromRight';
+				}
+				MotionUI.animateIn('#pr-'+i, whichAnimation);
+			};
+		}
+
+		var printerval = setInterval(prules, 3500);
+
+
+
+
+
+	</script>
+</body>
+</html>
+

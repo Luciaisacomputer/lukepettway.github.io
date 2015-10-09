@@ -1,0 +1,94 @@
+body{
+	overflow: hidden;
+	background-color: #000;
+	background-image: url('space-bg.jpg');
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+.nyan{
+	float:left;
+	display: inline;
+	max-width: 50%;
+}
+.title{
+	font-size: 2rem;
+	color: #fff;
+	text-align: center;
+	font-family: 'Duru Sans', sans-serif;
+}
+.title-container{
+	margin-top: 50px;
+	margin-bottom: 50px;
+}
+.poptarts{
+	position: relative;
+	overflow: hidden;
+    zoom: 1;
+    margin-bottom: 50px;
+}
+.pizza-row{
+	position: relative;
+	width:100%;
+	height: 600px
+
+}
+.pizza{
+	position: absolute;
+}
+.pizza-1{
+	left: 10%;
+	top: 2%;
+}
+.pizza-2{
+	left: 30%;
+	top: 12%;
+}
+.pizza-3{
+	left: 80%;
+	top: 80%;
+}
+.pizza-4{
+	left: 50%;
+	top: 15%;
+}
+.pizza-5{
+	right: 75%;
+	bottom: 7%;
+}
+.pizza-6{
+	left: 5%;
+	top: 21%;
+}
+.pizza-7{
+	left: 41%;
+    top: 56%;
+}
+.pizza-8{
+	right: 20%;
+	top: 8%;
+}
+.pizza-9{
+	bottom: 10%;
+	right: 2%;
+}
+.pizza-10{
+	bottom: 20%;
+	right: 22%;
+}
+.pizzarules{
+	position: absolute;
+	color: #fff;
+	font-family: 'Duru Sans', sans-serif;
+}
+.pr1{    
+	top: 33%;
+    left: 30%;
+}
+.pr2{
+	top: 23%;
+	left: 64%;
+}
+.pr3{
+	left: 53%;
+	top: 53%;
+}
